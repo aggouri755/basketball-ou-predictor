@@ -10,12 +10,15 @@ def preprocess_image(image):
     _, thresh = cv2.threshold(gray, 150, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     return thresh
 
-def extract_text(image):
-    """Use Tesseract OCR to extract text from an image."""
-    processed_img = preprocess_image(image)
-    extracted_text = pytesseract.image_to_string(processed_img)
-    return extracted_text
+import easyocr
 
+reader = easyocr.Reader(['en'])
+
+def extract_text(image):
+    """Extract text from an image using EasyOCR."""
+    processed_img = preprocess_image(image)
+    extracted_text = reader.readtext(processed_img, detail=0)
+    return " ".join(extracted_text)
 def predict_over_under(stats):
     """Calculate Over/Under prediction based on extracted stats."""
     try:
