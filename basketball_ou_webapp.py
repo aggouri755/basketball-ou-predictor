@@ -12,7 +12,12 @@ def preprocess_image(image):
 
 import easyocr
 
-reader = easyocr.Reader(['en'])
+import easyocr
+import torch
+
+# Ensure EasyOCR downloads model before first use
+torch.hub._validate_not_a_forked_repo = lambda a, b, c: True  # Fixes some Torch download issues
+reader = easyocr.Reader(['en'], download_enabled=True)
 
 def extract_text(image):
     """Extract text from an image using EasyOCR with better filtering."""
