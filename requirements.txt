@@ -6,3 +6,7 @@ pillow
 opencv-python-headless
 pytesseract
 tesseract-ocr
+easyocr
+torch
+torchvision
+opencv-python-headless
