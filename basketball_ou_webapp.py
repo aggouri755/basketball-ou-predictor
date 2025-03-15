@@ -15,10 +15,14 @@ import easyocr
 reader = easyocr.Reader(['en'])
 
 def extract_text(image):
-    """Extract text from an image using EasyOCR."""
+    """Extract text from an image using EasyOCR with better filtering."""
     processed_img = preprocess_image(image)
     extracted_text = reader.readtext(processed_img, detail=0)
-    return " ".join(extracted_text)
+
+    # Keep only text lines that contain numbers (likely scores)
+    filtered_text = [line for line in extracted_text if any(char.isdigit() for char in line)]
+
+    return " ".join(filtered_text)
 def predict_over_under(stats):
     """Calculate Over/Under prediction based on extracted stats."""
     try:
