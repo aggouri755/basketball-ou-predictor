@@ -10,3 +10,10 @@ easyocr
 torch
 torchvision
 opencv-python-headless
+streamlit
+easyocr
+torch
+torchvision
+opencv-python-headless
+numpy
+pillow
